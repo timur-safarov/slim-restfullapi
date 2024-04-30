@@ -1,18 +1,17 @@
 <?php
 
-
 /**
  * Footer
  * Main footer file for the theme.
  * php version 8.3.6
  *
  * @category   Config
- * @package    WordPress
+ * @package    Framework_Slim
  * @subpackage Mytheme
  * @author     Timur Safarov <tisafarov@gmail.com>
- * @version    1.2.18
- * @license    https://www.gnu.org/licenses/gpl-3.0.txt GNU/GPLv3
- * @link       ****
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU General Public License
+ * @version    GIT: <ae6f1f9>
+ * @link       https://github.com/timur-safarov/slim-restfullapi
  * @since      1.0.0
  */
 
