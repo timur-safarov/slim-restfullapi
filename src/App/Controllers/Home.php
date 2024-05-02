@@ -24,8 +24,7 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Slim\Views\PhpRenderer;
 use Defuse\Crypto\Crypto;
 use Defuse\Crypto\Key;
-use \Rollbar\Rollbar;
-use \Rollbar\Payload\Level;
+
 
 /**
  * Home Class for main page
@@ -58,15 +57,6 @@ class Home
      */
     public function __invoke(Request $request, Response $response): Response
     {
-
-        // Rollbar::log(Level::INFO, 'Test info message');
-        
-        try {
-            throw new \Exception('Test exception');
-        } catch (\Exception $e) {
-            \Sentry\captureException($e);
-        }
-
         return $this->view->render($response, 'home.php');
     }
 

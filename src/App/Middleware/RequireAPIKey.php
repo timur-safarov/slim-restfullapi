@@ -70,6 +70,11 @@ class RequireAPIKey
                 json_encode('api-key missing from request')
             );
 
+            \Rollbar\Rollbar::log(
+                \Rollbar\Payload\Level::ERROR,
+                'api-key missing from request'
+            );
+
             return $response->withStatus(400);
 
         }
@@ -88,6 +93,8 @@ class RequireAPIKey
             $response->getBody()->write(
                 json_encode('invalid API key')
             );
+
+            \Rollbar\Rollbar::log(\Rollbar\Payload\Level::ERROR, 'invalid API key');
 
             return $response->withStatus(401);
 

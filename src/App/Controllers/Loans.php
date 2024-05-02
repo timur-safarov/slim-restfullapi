@@ -69,7 +69,7 @@ class Loans
     {
 
         // Выбираем сортировку
-        $sort = is_array($request->getQueryParams()['sort']) 
+        $sort = is_array(@$request->getQueryParams()['sort']) 
                 ? $request->getQueryParams()['sort'] 
                 : [];
 
@@ -102,13 +102,11 @@ class Loans
         $this->validator = $this->validator->withData($body);
 
         if (!$this->validator->validate()) {
-
             $response->getBody()->write(
                 json_encode($this->validator->errors())
             );
 
             return $response->withStatus(422);
-
         }
 
         $id = $this->repository->create($body);
@@ -210,7 +208,7 @@ class Loans
      * 
      * @return Response
      */
-    public function update(
+    public function delete(
         Request $request,
         Response $response,
         string $id

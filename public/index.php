@@ -26,21 +26,13 @@ define('APP_ROOT', dirname(__DIR__));
 require APP_ROOT . '/vendor/autoload.php';
 
 // Error traking
-// \Rollbar\Rollbar::init(
-// 	[
-// 	    'access_token' => '598ecf0f1ba04e0f9b5a1a10090d06ed',
-// 	    // production, development
-// 	    'environment'  => 'development',
-// 	]
-// );
-
-\Sentry\init([
-  'dsn' => 'https://dd4218151310ae594df1d66feb27f131@o4507177440641024.ingest.us.sentry.io/4507177443852288',
-  // Specify a fixed sample rate
-  'traces_sample_rate' => 1.0,
-  // Set a sampling rate for profiling - this is relative to traces_sample_rate
-  'profiles_sample_rate' => 1.0,
-]);
+\Rollbar\Rollbar::init(
+    [
+        'access_token' => '598ecf0f1ba04e0f9b5a1a10090d06ed',
+        // production, development
+        'environment'  => 'development',
+    ]
+);
 
 $dotenv = Dotenv\Dotenv::createImmutable(dirname(__DIR__));
 

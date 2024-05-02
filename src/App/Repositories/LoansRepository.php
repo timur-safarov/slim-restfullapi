@@ -50,27 +50,36 @@ class LoansRepository
      * 
      * @return array
      */
-    public function getAll(array $sort=[]): array
+    public function getAll(array $sort=[], $limit = null): array
     {
         $pdo = $this->database->getConnection();
 
         // Сводим в нижний регистр
         $sort = array_map('mb_strtolower', array_map('trim', $sort));
+        $sql_tail = [];
 
-        // Получаем сортировку по полю created_at
-        $created_at = (
-            array_key_exists('created_at', $sort) 
-            && in_array($sort['created_at'], ['asc', 'desc'])
-        ) ? $sort['created_at'] : 'asc';
+        foreach ($sort as $key => $value) {
+            if (in_array($key, ['created_at', 'sum'])
+                && in_array($sort[$key], ['asc', 'desc'])
+            ) {
+                // Получаем сортировку по полю created_at
+                $sql_tail[] = "$key " . $sort['created_at'];
+            }
+        }
 
-        // Получаем сортировку по полю sum
-        $sum = (
-            array_key_exists('sum', $sort) 
-            && in_array($sort['sum'], ['asc', 'desc'])
-        ) ? $sort['sum'] : 'asc';
+        // Получаем строку с сортировкой
+        $sql_tail = ($sql_tail) ? ' ORDER BY ' . implode(',', $sql_tail) : '';
 
+        if (is_numeric($limit) && $limit > 0) {
+            $sql_tail .= ' limit ' . $limit;
+        }
+        
+        // Так как у нас даты храняться в виде strtotime
+        // используем DATE_FORMAT для приведения к дате
         $stmt = $pdo->query(
-            "SELECT * FROM loans ORDER BY created_at $created_at, sum $sum"
+            "SELECT *, "
+            . "DATE_FORMAT(FROM_UNIXTIME(`created_at`), '%e %b %Y') AS created_at" 
+            . " FROM loans" . $sql_tail
         );
     
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -85,7 +94,12 @@ class LoansRepository
      */
     public function getById(int $id): array|bool
     {
-        $sql = 'SELECT * FROM loans WHERE id = :id';
+
+        // Так как у нас даты храняться в виде strtotime
+        // используем DATE_FORMAT для приведения к дате
+        $sql = 'SELECT *, '
+            . " DATE_FORMAT(FROM_UNIXTIME(`created_at`), '%e %b %Y') AS created_at "
+            . ' FROM loans WHERE id = :id';
 
         $pdo = $this->database->getConnection();
 

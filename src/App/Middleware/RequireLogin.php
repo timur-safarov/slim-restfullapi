@@ -77,6 +77,8 @@ class RequireLogin
 
         $response->getBody()->write('Unauthorised');
 
+        \Rollbar\Rollbar::log(\Rollbar\Payload\Level::ERROR, 'Unauthorised');
+
         return $response->withStatus(401);
     }
 }

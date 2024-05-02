@@ -103,24 +103,41 @@ sudo apt install httpie
 Указать value - ac0a79447e815c9c8ea2a2a2e5602b1c
 
 Получение списка всех займов с базовыми фильтрами по дате создания и сумме
-GET http://slim.local/api/loans
-GET http://slim.local/api/loans?sort[created_at]=asc&sort[sum]=desc
+GET api/loans
+GET api/loans?sort[created_at]=asc&sort[sum]=desc
 В headers
 key - Content-type
 value - application/json
 
 Создание нового займа.
-POST http://slim.local/api/loans
+POST api/loans
 {
 	"fio": "Иван Иваныч",
 	"sum": "20202020"
 }
 
-GET /loans/{id} — получение информации о займе
+GET api/loans/{id} — получение информации о займе
 
 
-PUT /loans/{id} — обновление информации о займе
+PUT api/loans/{id} — обновление информации о займе
 {
     "fio": "Ниолай Иванович Говнюков 300",
     "sum": 1230
 }
+
+
+/**====================================================================================================**/
+
+Запуск проверки на Code style
+./vendor/bin/phpcs ./config/
+./vendor/bin/phpcs ./config/confg.php
+
+Запуск проверки на ошибки в коде
+./vendor/bin/phpcbf ./config/
+./vendor/bin/phpcbf ./config/confg.php
+
+/**====================================================================================================**/
+
+Unit тестирование
+Запускаем тесты
+./vendor/bin/phpunit tests
