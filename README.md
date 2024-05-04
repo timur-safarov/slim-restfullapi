@@ -104,10 +104,12 @@ https://rollbar.com/signup
 
 - POST /api/loans
 - В body->raw: 
+```json
 {
 	"fio": "Имя заёмщика",
 	"sum": "1230"
 }
+```
 
 В headers
 - key: Content-type
