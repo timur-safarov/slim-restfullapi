@@ -84,8 +84,8 @@ https://rollbar.com/signup
 
 1). Получение списка всех займов с базовыми фильтрами по дате создания и сумме
 
-- GET api/loans
-- GET api/loans?sort[created_at]=asc&sort[sum]=desc
+- GET /api/loans
+- GET /api/loans?sort[created_at]=asc&sort[sum]=desc
   
   В headers
 - key: Content-type
@@ -95,8 +95,8 @@ https://rollbar.com/signup
 
 2). Создание нового займа
 
-- POST api/loans
-- В body->raw
+- POST /api/loans
+- В body->raw: 
 {
 	"fio": "Имя заёмщика",
 	"sum": "1230"
@@ -109,7 +109,7 @@ https://rollbar.com/signup
 /**-----------------------------------------------------------------------------**/
 
 3). Получение информации о займе
-- GET api/loans/{id}
+- GET /api/loans/{id}
 
 В headers
 - key: Content-type
@@ -118,8 +118,8 @@ https://rollbar.com/signup
 /**-----------------------------------------------------------------------------**/
 
 4). Обновление информации о займе
-- PUT api/loans/{id}
-- В body->raw
+- PUT /api/loans/{id}
+- В body->raw: 
 {
     "fio": "Имя заёмщика",
     "sum": 1230
@@ -132,8 +132,8 @@ https://rollbar.com/signup
 /**-----------------------------------------------------------------------------**/
 
 5). Удаление займа
-- DELETE api/loans/{id}
-- В body->raw
+- DELETE /api/loans/{id}
+- В body->raw: 
 {
     "fio": "Имя заёмщика",
     "sum": 1230
