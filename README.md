@@ -129,10 +129,12 @@ https://rollbar.com/signup
 4). Обновление информации о займе
 - PUT /api/loans/{id}
 - В body->raw: 
+```json
 {
-    "fio": "Имя заёмщика",
-    "sum": 1230
+	"fio": "Имя заёмщика",
+	"sum": "1230"
 }
+```
 
 В headers
 - key: Content-type
@@ -142,11 +144,6 @@ https://rollbar.com/signup
 
 5). Удаление займа
 - DELETE /api/loans/{id}
-- В body->raw: 
-{
-    "fio": "Имя заёмщика",
-    "sum": 1230
-}
 
 В headers
 - key: Content-type
