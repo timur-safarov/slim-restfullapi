@@ -25,6 +25,7 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Slim\Routing\RouteContext;
 use App\Repositories\LoansRepository;
 use Slim\Exception\HttpNotFoundException;
+use Slim\Exception\NotFoundException;
 
 /**
  * GetLoans Class this is middleware for get data from current loan resource
@@ -58,23 +59,56 @@ class GetLoans
     public function __invoke(Request $request, RequestHandler $handler): Response
     {
 
-        $context = RouteContext::fromRequest($request);
+        try {
 
-        $route = $context->getRoute();
+            $context = RouteContext::fromRequest($request);
 
-        $id = $route->getArgument('id');
+            $route = $context->getRoute();
 
-        $loan = $this->repository->getById((int) $id);
+            $id = $route->getArgument('id');
 
-        // Выкидываем стандартный Exception о том что страница не найдена
-        if ($loan === false) {
-            \Rollbar\Rollbar::log(\Rollbar\Payload\Level::ERROR, 'loan not found');
-            throw new HttpNotFoundException($request, message: 'loan not found');
+            $loan = $this->repository->getById((int) $id);
+
+            // Выкидываем стандартный Exception о том что страница не найдена
+            if ($loan === false) {
+                \Rollbar\Rollbar::log(
+                    \Rollbar\Payload\Level::ERROR, 'loan not found'
+                );
+
+                // Родной метод slim - он работает не корректно, убрал его
+                // throw new HttpNotFoundException($request, message: 'not found');
+
+                throw new \Exception(
+                    message: json_encode( 
+                        [
+                            'message' => 'Loan not found',
+                            'id' => $id
+                        ]
+                    )
+                );
+
+            }
+
+        } catch(\Exception $e) {
+
+            // Создадим атрибут с переменной loan
+            // Потом в контроллере можно будет к ней обратиться
+            $request = $request->withAttribute('loan', $loan);
+
+            // Создаём объект responce
+            $response = $handler->handle($request);
+
+            // Заносим ошибку в responce
+            $response->getBody()->write($e->getMessage());
+
+            // Страница не найдена
+            return $response->withStatus(404);
+
         }
 
         $request = $request->withAttribute('loan', $loan);
 
         return $handler->handle($request);
-        
+
     }
 }

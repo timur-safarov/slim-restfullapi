@@ -42,11 +42,11 @@
 
     <label for="password">Password</label>
     <input type="password" name="password" id="password" 
-            size="8" minlength="8" maxlength="16">
+            minlength="6" maxlength="16">
 
     <label for="password_confirmation">Repeat password</label>
     <input type="password" name="password_confirmation"
-           id="password_confirmation">
+           id="password_confirmation" minlength="6" maxlength="16">
 
     <button>Sign up</button>
 </form>

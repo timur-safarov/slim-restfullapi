@@ -18,8 +18,8 @@ deny from all
   # RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 </IfModule>
 
-php_flag display_startup_errors On
-php_flag display_errors On
-php_flag html_errors On
-php_value docref_root 1
-php_value docref_ext 1
+php_flag display_startup_errors Off
+php_flag display_errors Off
+php_flag html_errors Off
+php_value docref_root 0
+php_value docref_ext 0

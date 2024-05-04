@@ -55,7 +55,7 @@ class Signup
             [
                 'name' => ['required'],
                 'email' => ['required', 'email'],
-                'password' => ['required', ['lengthMin', 6]],
+                'password' => ['required', ['lengthMin', 6], ['lengthMax', 16]],
                 'password_confirmation' => ['required', ['equals', 'password']]
             ]
         );

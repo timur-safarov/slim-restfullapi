@@ -25,18 +25,17 @@ define('APP_ROOT', dirname(__DIR__));
 
 require APP_ROOT . '/vendor/autoload.php';
 
+$dotenv = Dotenv\Dotenv::createImmutable(dirname(__DIR__));
+$dotenv->load();
+
 // Error traking
 \Rollbar\Rollbar::init(
     [
-        'access_token' => '598ecf0f1ba04e0f9b5a1a10090d06ed',
+        'access_token' => $_ENV['ROLLBAR_TOKEN'],
         // production, development
         'environment'  => 'development',
     ]
 );
-
-$dotenv = Dotenv\Dotenv::createImmutable(dirname(__DIR__));
-
-$dotenv->load();
 
 $builder = new ContainerBuilder;
 

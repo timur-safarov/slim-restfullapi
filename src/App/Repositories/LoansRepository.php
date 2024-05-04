@@ -46,7 +46,8 @@ class LoansRepository
     /**
      * Method getAll return all rows from loan table
      *
-     * @param $sort array - sort data by fields created_at or sum
+     * @param $sort  array - sort data by fields created_at or sum
+     * @param $limit null|int - amount of rows
      * 
      * @return array
      */
@@ -171,7 +172,7 @@ class LoansRepository
      * 
      * @return int
      */
-    public function delete(string $id): int
+    public function delete(int $id): int
     {
         $sql = 'DELETE FROM loans WHERE id = :id';
 

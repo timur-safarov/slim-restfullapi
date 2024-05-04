@@ -138,9 +138,25 @@ class Loans
         // Attribute с ключом loan создаётся в Middleware/GetLoans.php
         $loan = $request->getAttribute('loan');
 
-        $body = json_encode($loan);
-    
-        $response->getBody()->write($body);
+        // Ошибки и статусы можно менять в контроллере
+        // if (!$loan) {
+
+        //     $body = json_encode(
+        //         [
+        //             'message' => 'Loan not found',
+        //             'id' => $id
+        //         ]
+        //     );
+
+        //     $response->getBody()->write($body);
+
+        //     return $response->withStatus(404);
+        // }
+
+        if ($loan) {
+            $body = json_encode($loan);
+            $response->getBody()->write($body);  
+        }
     
         return $response;        
     }
@@ -162,6 +178,9 @@ class Loans
     ): Response {
 
         $body = $request->getParsedBody();
+
+        // Attribute с ключом loan создаётся в Middleware/GetLoans.php
+        $loan = $request->getAttribute('loan');
 
         // Так как created_at на не нужно - убераем её из правил валидации модели
         $this->validator->reset();
@@ -185,16 +204,21 @@ class Loans
 
         }
 
-        $rows = $this->repository->update((int) $id, $body);
+        // Если запись найдена обновляем её и выводим
+        if ($loan) {
 
-        $body = json_encode(
-            [
-                'message' => 'Loan updated',
-                'rows' => $rows
-            ]
-        );
+            $rows = $this->repository->update((int) $id, $body);
 
-        $response->getBody()->write($body);
+            $body = json_encode(
+                [
+                    'message' => 'Loan updated',
+                    'rows' => $rows
+                ]
+            );
+
+            $response->getBody()->write($body);
+
+        }
 
         return $response;
     }
@@ -213,16 +237,23 @@ class Loans
         Response $response,
         string $id
     ): Response {
-        $rows = $this->repository->delete($id);
 
-        $body = json_encode(
-            [
-                'message' => 'Loan deleted',
-                'rows' => $rows
-            ]
-        );
+        // Attribute с ключом loan создаётся в Middleware/GetLoans.php
+        $loan = $request->getAttribute('loan');
 
-        $response->getBody()->write($body);
+        if ($loan) {
+            
+            $rows = $this->repository->delete((int)$id);
+
+            $body = json_encode(
+                [
+                    'message' => 'Loan deleted',
+                    'rows' => $rows
+                ]
+            );
+
+            $response->getBody()->write($body);
+        }
 
         return $response;
     }
