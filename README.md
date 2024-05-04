@@ -170,21 +170,28 @@ https://rollbar.com/signup
 # Прверка кода
 
 - Запуск проверки на Code style
+
 ```./vendor/bin/phpcs ./config/```
+
 ```./vendor/bin/phpcs ./config/confg.php```
 
 - Проверить все папки с Php скриптами
+
 ```./vendor/bin/phpcs --extensions=php src config public views tests```
 
 - Запуск проверки на ошибки в коде
+
 ```./vendor/bin/phpcbf ./config/```
+
 ```./vendor/bin/phpcbf ./config/confg.php```
 
 - Проверить все папки с Php скриптами
+
 ```./vendor/bin/phpcbf --extensions=php src config public views tests```
 
 /**=============================================================================**/
 
 # Unit тестирование
 - Запускаем тесты
+
 ```./vendor/bin/phpunit tests```
