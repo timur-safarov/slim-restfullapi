@@ -88,59 +88,60 @@ https://rollbar.com/signup
 - GET api/loans?sort[created_at]=asc&sort[sum]=desc
   
   В headers
-- key - Content-type
-- value - application/json
+- key: Content-type
+- value: application/json
 
 /**-----------------------------------------------------------------------------**/
 
 2). Создание нового займа
-POST api/loans
-В body->raw
+
+- POST api/loans
+- В body->raw
 {
 	"fio": "Имя заёмщика",
 	"sum": "1230"
 }
 
 В headers
-key - Content-type
-value - application/json
+- key: Content-type
+- value: application/json
 
 /**-----------------------------------------------------------------------------**/
 
 3). Получение информации о займе
-GET api/loans/{id}
+- GET api/loans/{id}
 
 В headers
-key - Content-type
-value - application/json
+- key: Content-type
+- value: application/json
 
 /**-----------------------------------------------------------------------------**/
 
 4). Обновление информации о займе
-PUT api/loans/{id}
-В body->raw
+- PUT api/loans/{id}
+- В body->raw
 {
     "fio": "Имя заёмщика",
     "sum": 1230
 }
 
 В headers
-key - Content-type
-value - application/json
+- key: Content-type
+- value: application/json
 
 /**-----------------------------------------------------------------------------**/
 
 5). Удаление займа
-DELETE api/loans/{id}
-В body->raw
+- DELETE api/loans/{id}
+- В body->raw
 {
     "fio": "Имя заёмщика",
     "sum": 1230
 }
 
 В headers
-key - Content-type
-value - application/json
+- key: Content-type
+- value: application/json
 
 /**-----------------------------------------------------------------------------**/
 
@@ -180,4 +181,4 @@ value - application/json
 
 # Unit тестирование
 Запускаем тесты
-./vendor/bin/phpunit tests
+- ./vendor/bin/phpunit tests
