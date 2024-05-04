@@ -29,7 +29,7 @@
 API тестировалось на версии PHP 8.3^ но 8.2 тоже должно подойти
 
 1). Склонируйте репозиторий проекта в корневую папку вашего сайта
-git clone git@github.com:timur-safarov/slim-restfullapi.git
+```git clone git@github.com:timur-safarov/slim-restfullapi.git```
 
 2). Залейте дамп (./database.sql) базы данных на свой сервер, предварительно создав пустую базу
 
@@ -53,7 +53,7 @@ echo hash_hmac('sha256', 'Lorem ipsum dolor sit amet', random_bytes(10));
 
 Сгенерировать ENCRYPTION_KEY через консоль
 Зайти в корень сайта и ввести
-php ./vendor/bin/generate-defuse-key
+```php ./vendor/bin/generate-defuse-key```
 
 Сгенерировать ENCRYPTION_KEY через PHP скрипт
 ```php
@@ -169,22 +169,22 @@ https://rollbar.com/signup
 
 # Прверка кода
 
-Запуск проверки на Code style
-- ./vendor/bin/phpcs ./config/
-- ./vendor/bin/phpcs ./config/confg.php
+- Запуск проверки на Code style
+```./vendor/bin/phpcs ./config/```
+```./vendor/bin/phpcs ./config/confg.php```
 
-Проверить все папки с Php скриптами
-- ./vendor/bin/phpcs --extensions=php src config public views tests
+- Проверить все папки с Php скриптами
+```./vendor/bin/phpcs --extensions=php src config public views tests```
 
-Запуск проверки на ошибки в коде
-- ./vendor/bin/phpcbf ./config/
-- ./vendor/bin/phpcbf ./config/confg.php
+- Запуск проверки на ошибки в коде
+```./vendor/bin/phpcbf ./config/```
+```./vendor/bin/phpcbf ./config/confg.php```
 
-Проверить все папки с Php скриптами
-- ./vendor/bin/phpcbf --extensions=php src config public views tests
+- Проверить все папки с Php скриптами
+```./vendor/bin/phpcbf --extensions=php src config public views tests```
 
 /**=============================================================================**/
 
 # Unit тестирование
-Запускаем тесты
-- ./vendor/bin/phpunit tests
+- Запускаем тесты
+```./vendor/bin/phpunit tests```
