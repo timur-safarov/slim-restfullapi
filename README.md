@@ -47,23 +47,30 @@ DB_PASS
 Остальные параметры вы можите сгенерировать заново, либо оставить как есть
 
 Сгенерировать HASH_SECRET_KEY через PHP скрипт
+```php
 echo hash_hmac('sha256', 'Lorem ipsum dolor sit amet', random_bytes(10));
+```
 
 Сгенерировать ENCRYPTION_KEY через консоль
 Зайти в корень сайта и ввести
 php ./vendor/bin/generate-defuse-key
 
 Сгенерировать ENCRYPTION_KEY через PHP скрипт
+```php
 $key = Key::createNewRandomKey();
 $storeMe = $key->saveToAsciiSafeString();
 $key = Key::loadFromAsciiSafeString($storeMe);
 echo $storeMe;
+```
 
 API_KEY будет доступен после регистрации - в вашем профиле
 
 ROLLBAR_TOKEN - error трэкер.
+
 Чтобы иметь доступ к дашборду с диаграммами - зарегистрируйтесь
+
 https://rollbar.com/signup
+
 И поменяйте ROLLBAR_TOKEN на свой
 
 4). Если вам нужен ваш личный API_KEY для доступа к API, вам нужно зарегистрироваться на сайте.
