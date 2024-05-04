@@ -1,6 +1,6 @@
 # Slim PHP REST API Authentication, plus Web-based Signup and Login, plus Unit tests
 
-Задача:
+# Задача:
 Разработать REST API для управления займами.
 
 * 1). Реализовать следующие API методы:
@@ -24,7 +24,7 @@
 
 /**=============================================================================**/
 
-Install
+# Install
 Перед установкой у вас уже должен быть рабочий адрес вашего сайта и доступ к базе данных
 API тестировалось на версии PHP 8.3^ но 8.2 тоже должно подойти
 
@@ -32,6 +32,10 @@ API тестировалось на версии PHP 8.3^ но 8.2 тоже до
 git clone git@github.com:timur-safarov/slim-restfullapi.git
 
 2). Залейте дамп (./database.sql) базы данных на свой сервер, предварительно создав пустую базу
+
+	- После дампа на сайте уже будет аккаунт администратора
+	- Login: admin@email.ru
+	- Password: 123456
 
 3). Переименуйте файл .env.example на .env
 Откройте .env и поменяйте параметры для подключения к базе данных, если у вас другие
@@ -68,13 +72,7 @@ https://rollbar.com/signup
 
 /**=============================================================================**/
 
-После дампа на сайте уже будет аккаунт администратора
-Login: admin@email.ru
-Password: 123456
-
-/**=============================================================================**/
-
-Работаем с API через POSTMAN
+# Работаем с API через POSTMAN
 
 Во вкладке Authorization - вбиваем api-key
 Указать key - X-API-Key
@@ -85,11 +83,13 @@ Password: 123456
 /**-----------------------------------------------------------------------------**/
 
 1). Получение списка всех займов с базовыми фильтрами по дате создания и сумме
-GET api/loans
-GET api/loans?sort[created_at]=asc&sort[sum]=desc
-В headers
-key - Content-type
-value - application/json
+
+- GET api/loans
+- GET api/loans?sort[created_at]=asc&sort[sum]=desc
+  
+  В headers
+- key - Content-type
+- value - application/json
 
 /**-----------------------------------------------------------------------------**/
 
@@ -144,7 +144,7 @@ value - application/json
 
 /**-----------------------------------------------------------------------------**/
 
-Описание заголовков
+# Описание заголовков
 
 - 200 OK - удаление, обновление, вывод данных
 - 201 Created - запись только что создана
@@ -160,22 +160,24 @@ value - application/json
 
 /**=============================================================================**/
 
+# Прверка кода
+
 Запуск проверки на Code style
-./vendor/bin/phpcs ./config/
-./vendor/bin/phpcs ./config/confg.php
+- ./vendor/bin/phpcs ./config/
+- ./vendor/bin/phpcs ./config/confg.php
 
 Проверить все папки с Php скриптами
-./vendor/bin/phpcs --extensions=php src config public views tests
+- ./vendor/bin/phpcs --extensions=php src config public views tests
 
 Запуск проверки на ошибки в коде
-./vendor/bin/phpcbf ./config/
-./vendor/bin/phpcbf ./config/confg.php
+- ./vendor/bin/phpcbf ./config/
+- ./vendor/bin/phpcbf ./config/confg.php
 
 Проверить все папки с Php скриптами
- ./vendor/bin/phpcbf --extensions=php src config public views tests
+- ./vendor/bin/phpcbf --extensions=php src config public views tests
 
 /**=============================================================================**/
 
-Unit тестирование
+# Unit тестирование
 Запускаем тесты
 ./vendor/bin/phpunit tests
