@@ -27,6 +27,29 @@
 # Install
 Перед установкой у вас уже должен быть рабочий адрес вашего сайта и доступ к базе данных
 API тестировалось на версии PHP 8.3^ но 8.2 тоже должно подойти
+Также нужно установить git и composer
+
+### Не забудьте включить модуль mod_rewrite
+```sudo a2enmod rewrite```
+
+```conf
+<VirtualHost *:80>
+    ServerName 185.38.84.49
+    ServerAlias www.185.38.84.49
+    DocumentRoot /var/www/html/
+    ErrorLog /var/www/error.log
+    CustomLog /var/www/custom_error.log combined
+
+    # Включить mod_rewrite для директории
+    <Directory /var/www/html>
+        Options All
+            AllowOverride All
+        Order allow,deny
+        Allow from all
+            Require all granted
+    </Directory>
+</VirtualHost>
+```
 
 1). Склонируйте репозиторий проекта в корневую папку вашего сайта
 ```git clone git@github.com:timur-safarov/slim-restfullapi.git```
@@ -160,8 +183,8 @@ https://rollbar.com/signup
 - 401 Unauthorized
 - 403 Forbidden
 - 404 Not Found
-- 405 NOT_ALLOWED
-- 422 Unprocessable Entity
+- 405 NOT_ALLOWED - метод запрещён
+- 422 Unprocessable Entity - переданы не верные данные для модели
 - 500 Internal Server Error
 - 502 Bad Gateway Host Not Found or connection failed
 
@@ -195,3 +218,11 @@ https://rollbar.com/signup
 - Запускаем тесты
 
 ```./vendor/bin/phpunit tests```
+
+/**=============================================================================**/
+
+При использовании proxy или VPN на локальной машине может выдавать ошибку
+502 Bad Gateway
+Host Not Found or connection failed
+
+/**=============================================================================**/

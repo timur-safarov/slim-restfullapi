@@ -21,6 +21,10 @@ use Slim\Factory\AppFactory;
 use DI\ContainerBuilder;
 use Slim\Handlers\Strategies\RequestResponseArgs;
 
+use App\Middleware\ErrorMiddleware;
+
+use Slim\Middleware\RoutingMiddleware;
+
 define('APP_ROOT', dirname(__DIR__));
 
 require APP_ROOT . '/vendor/autoload.php';
@@ -51,7 +55,22 @@ $collector->setDefaultInvocationStrategy(new RequestResponseArgs);
 
 $app->addBodyParsingMiddleware();
 
-$app->addErrorMiddleware(true, true, true);
+// $app->addErrorMiddleware(true, true, true);
+
+// Кастомим вывод ошибок под себя
+$middleware = new ErrorMiddleware(
+    $app->getCallableResolver(),
+    $app->getResponseFactory(),
+    false, // Прячем вывод ошибок
+    false, // Прячем вывод ошибок
+    false  // Прячем вывод ошибок
+);
+
+$app->add($middleware);
+
+
+// $middleware = new RoutingMiddleware($app->getRouteResolver());
+// $app->add($middleware);
 
 require APP_ROOT . '/config/routes.php';
 

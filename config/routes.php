@@ -21,6 +21,7 @@ use App\Controllers\Loans;
 use App\Middleware\GetLoans;
 use Slim\Routing\RouteCollectorProxy;
 use App\Middleware\RequireAPIKey;
+use App\Middleware\MethodNotAllowed;
 use App\Controllers\Home;
 use App\Middleware\AddJsonResponseHeader;
 use App\Controllers\Signup;
@@ -61,6 +62,7 @@ $app->group(
 
         // Создание заёма
         $group->post('/loans', [Loans::class, 'create']);
+
 
         // GetLoans выбирает заём с текущим id
         $group->group(
