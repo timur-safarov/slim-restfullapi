@@ -61,7 +61,7 @@ class Home
         // echo 'http://'.$_SERVER["SERVER_NAME"];
 
         // echo $request->getUri()->getBaseUrl(); 
-        die;
+        // die;
 
         return $this->view->render($response, 'home.php');
     }
