@@ -63,8 +63,8 @@ class LoansRepository
             if (in_array($key, ['created_at', 'sum'])
                 && in_array($sort[$key], ['asc', 'desc'])
             ) {
-                // Получаем сортировку по полю created_at
-                $sql_tail[] = "$key " . $sort['created_at'];
+                // Получаем сортировку по полю created_at или sum
+                $sql_tail[] = "$key " . $sort[$key];
             }
         }
 
@@ -74,7 +74,7 @@ class LoansRepository
         if (is_numeric($limit) && $limit > 0) {
             $sql_tail .= ' limit ' . $limit;
         }
-        
+
         // Так как у нас даты храняться в виде strtotime
         // используем DATE_FORMAT для приведения к дате
         $stmt = $pdo->query(

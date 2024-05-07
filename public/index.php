@@ -66,6 +66,8 @@ $middleware = new ErrorMiddleware(
     false  // Прячем вывод ошибок
 );
 
+
+
 $app->add($middleware);
 
 
