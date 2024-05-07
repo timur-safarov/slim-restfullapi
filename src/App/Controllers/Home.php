@@ -57,6 +57,12 @@ class Home
      */
     public function __invoke(Request $request, Response $response): Response
     {
+
+        // echo 'http://'.$_SERVER["SERVER_NAME"];
+
+        // echo $request->getUri()->getBaseUrl(); 
+        die;
+
         return $this->view->render($response, 'home.php');
     }
 

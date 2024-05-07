@@ -71,6 +71,13 @@ $middleware = new ErrorMiddleware(
 $app->add($middleware);
 
 
+// $app->hook('slim.before', function () use ($app) {
+//     $posIndex = strpos( $_SERVER['PHP_SELF'], '/index.php');
+//     $baseUrl = substr( $_SERVER['PHP_SELF'], 0, $posIndex);
+//     $app->view()->appendData(array('baseUrl' => $baseUrl ));
+// });
+
+
 // $middleware = new RoutingMiddleware($app->getRouteResolver());
 // $app->add($middleware);
 

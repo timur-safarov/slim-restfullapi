@@ -54,9 +54,15 @@ class LoansTest extends TestCase
             exit('Данных для тестирования нету в базе - ' . __FILE__ . "\n");
         }
 
+
+        // print_r($_SERVER);
+        // echo 'http://'.$_SERVER["SERVER_NAME"];
+        // die;
+
+
         $this->_client = new \GuzzleHttp\Client(
             [
-                'base_uri' => 'http://slim.local',
+                'base_uri' => 'http://'.$_ENV['HTTP_HOST'],
                 'timeout'  => 10.0,
             ]
         );
